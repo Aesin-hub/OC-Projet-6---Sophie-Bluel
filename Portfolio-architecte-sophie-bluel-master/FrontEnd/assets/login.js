@@ -1,7 +1,7 @@
 const form = document.getElementById('login-form');
 
 form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Empêche le rechargement de la page
+    event.preventDefault(); // Désactive le fonctionnement de submit pour empecher le rechargement de la page
     
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;

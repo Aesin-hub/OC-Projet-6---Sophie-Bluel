@@ -7,6 +7,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -35,7 +36,9 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="portfolio-header">
+			<h2>Mes Projets</h2>
+		</div>
 		<div class="filters"></div>
 		<div class="gallery"></div>
 	</section>
@@ -61,6 +64,39 @@
 		</ul>
 	</nav>
 </footer>
+
+<div id="modal" class="modal hidden">
+	<div class="modal-content">
+		<span class="close-modal">&times;</span>
+
+		<div id="modal-gallery">
+			<h2>Galerie photo</h2>
+			<div class="gallery-modal"></div>
+			<hr class="modal-separator">
+			<button id="open-add-photo">Ajouter une photo</button>
+		</div>
+
+		<div id="modal-add-photo" class="hidden">
+			<h2>Ajout photo</h2>
+			<form id="add-photo-form">
+				<div class="upload-preview">
+					<i class="fa-regular fa-image"></i>
+					<input type="file" id="photo-upload" accept="image/*" required>
+				</div>
+				<label for="title">Titre</label>
+				<input type="text" id="title" name="title" required>
+
+				<label for="category">Catégorie</label>
+				<select name="category" id="category" required>
+					<option value="">Sélectionnez une catégorie</option>
+				</select>
+
+				<button type="submit" disabled>Valider</button>
+			</form>
+		</div>
+	</div>
+</div>
+
 <script src="./assets/script.js"></script>
 </body>
 </html>
