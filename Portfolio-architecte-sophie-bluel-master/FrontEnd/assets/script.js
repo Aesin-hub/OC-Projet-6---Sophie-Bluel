@@ -19,6 +19,8 @@ const fetchWorks = async () => {
       throw new Error('Network response was not ok');
     }
     works = await response.json();
+    window.works = works;
+
     displayWorks(0);
   } catch (error) {
     console.error('Error fetching works:', error);
@@ -117,53 +119,11 @@ if (token) {
   editBtn.classList.add('edit-button');
   editBtn.id = 'open-modal';
   portfolioHeader.appendChild(editBtn);
-}
 
-// Gestion ouverture de la modale
-const modal = document.getElementById('modal');
-const openModalBtn = document.getElementById('open-modal');
-const closeModalBtn = document.querySelector('.close-modal');
-
-if (openModalBtn && modal && closeModalBtn) {
-  openModalBtn.addEventListener('click', () => {
+  editBtn.addEventListener('click', () => {
+    const modal = document.getElementById('modal');
     modal.classList.remove('hidden');
-    displayModalGallery(works); // Affiche la galerie dans la modale
-  });
-
-  closeModalBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
-
-  // Fermer le modal en cliquant à l'extérieur
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.classList.add('hidden');
-    }
-  });
-}
-
-// Affichage galerie dans la modale
-function displayModalGallery(works) {
-  const galleryModal = document.querySelector ('.gallery-modal');
-  galleryModal.innerHTML = ''; // Vide la galerie avant de l'afficher
-
-  works.forEach(work => {
-    const figure = document.createElement ('figure');
-    figure.classList.add('modal-figure');
-
-    const img = document.createElement('img');
-    img.src = work.imageUrl;
-    img.alt = work.title;
-
-    const deleteBtn = document.createElement ('button');
-    deleteBtn.classList.add('delete-btn');
-    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-
-    deleteBtn.addEventListener('click', () => deleteWork(work.id));
-
-    figure.appendChild(img);
-    figure.appendChild(deleteBtn);
-    galleryModal.appendChild(figure);
+    displayModalGallery(window.works);
   });
 }
 
