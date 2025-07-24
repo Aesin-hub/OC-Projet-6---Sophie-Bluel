@@ -391,6 +391,11 @@ footer nav ul {
   gap: 5px;
 }
 
+.edit-button:hover {
+  color: #B1663C;
+}
+
+
 .modal-content {
   background: white;
   padding: 40px 30px 30px 30px;
