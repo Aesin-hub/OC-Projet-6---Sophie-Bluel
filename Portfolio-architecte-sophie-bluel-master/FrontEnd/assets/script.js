@@ -90,30 +90,34 @@ const displayBtnsFilters = (categories) => {
   const allBtn = document.createElement('button');
   allBtn.innerText = 'Tous';
   allBtn.dataset.id = 0;
-  allBtn.classList.add('filter-btn');
+  allBtn.classList.add('filter-btn', 'active'); // active par défaut
   filterButtons.appendChild(allBtn);
+
+  allBtn.addEventListener('click', () => {
+    // Retirer la classe active de tous les boutons
+    document.querySelectorAll('.filter-btn').forEach((btn) => btn.classList.remove('active'));    // Ajouter la classe active au bouton "Tous"
+    allBtn.classList.add('active');
+    // Afficher tous les works
+    displayWorks(0);
+  });
 
   // Boutons pour chaque catégorie
   categories.forEach((category) => {
     const btn = document.createElement('button');
-    btn.innerText = category.name;
-    btn.dataset.id = category.id;
+    btn.innerText = category.name;   
     btn.classList.add('filter-btn');
     filterButtons.appendChild(btn);
-  });
 
-  // Ajout de l'événement de clic pour chaque bouton
-  const buttons = document.querySelectorAll('.filters button');
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const categoryId = parseInt(button.dataset.id);
-        // Retirer la classe active de tous les boutons
-        buttons.forEach((btn) => btn.classList.remove('active'));
-        // Ajouter la classe active au bouton cliqué
-        button.classList.add('active');
-        // Afficher les works filtrés
-      displayWorks(categoryId);
+    btn.addEventListener('click', () => {   
+      // Retirer la classe active de tous les boutons
+      document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));      
+      // Ajouter la classe active au bouton cliqué
+      btn.classList.add('active');      
+      // Afficher les works filtrés
+      displayWorks(category.id);
     });
+
+
   });
 };
 
@@ -139,8 +143,6 @@ if (token) {
   if (filtersSection) {
     filtersSection.style.visibility = 'hidden';
   }
-
-  
   // ==========================
   // 5. AFFICHAGE DU MODE ÉDITION
   // ==========================
@@ -181,3 +183,4 @@ if (token) {
 window.displayWorks = displayWorks; // Rend accessible dans d'autres fichiers JS
 fetchWorks(); // Récupère les travaux
 fetchCategories(); // Récupère les catégories
+
